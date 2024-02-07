@@ -1,7 +1,11 @@
 node_modules/
 dist/
 .git/
-README
+README.md
 .eslintrc.js
 .prettierrc
 Dockerfile
+.gitignore
+.dockerignore
+.env.*
+.env
