@@ -16,10 +16,10 @@ export type UpdateContactDTO = {
 };
 
 export type UpdateContactDTORaw = {
-    name: string,
-    update: string
-}
+    name: string;
+    update: string;
+};
 
 export type FindContactDTO = {
     name: string;
-}
+};

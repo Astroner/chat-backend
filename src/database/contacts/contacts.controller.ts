@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Delete,
+    Patch,
+    Post,
+    UploadedFile,
+    UseInterceptors,
+} from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import {
     CreateContactDTO,
@@ -17,36 +25,41 @@ export class ContactsController {
         await this.contact.create(body);
     }
 
-    @Post("find")
+    @Post('find')
     async findContact(@Body() body: FindContactDTO) {
         const contact = await this.contact.getByName(body.name);
 
         return {
             name: contact.name,
             publicKey: contact.publicKey,
-            publicSign: contact.publicSign
-        }
+            publicSign: contact.publicSign,
+        };
     }
-
 
     @Delete('delete')
     @UseInterceptors(FileInterceptor('signature'))
-    async deleteContact(@Body() body: DeleteContactDTO, @UploadedFile() signature: Express.Multer.File): Promise<void> {
+    async deleteContact(
+        @Body() body: DeleteContactDTO,
+        @UploadedFile() signature: Express.Multer.File,
+    ): Promise<void> {
         await this.contact.deleteBySignedName({
             name: body.name,
-            signature: signature.buffer
+            signature: signature.buffer,
         });
     }
 
     @Patch('patch')
     @UseInterceptors(FileInterceptor('signature'))
-    async updateContact(@Body() body: UpdateContactDTORaw, @UploadedFile() signature: Express.Multer.File) {
-        const parsedUpdate = JSON.parse(body.update)
+    async updateContact(
+        @Body() body: UpdateContactDTORaw,
+        @UploadedFile() signature: Express.Multer.File,
+    ) {
+        const parsedUpdate = JSON.parse(body.update);
 
         await this.contact.updateBySignedName({
             name: body.name,
             update: parsedUpdate,
-            signature: signature.buffer
+            signature: signature.buffer,
         });
     }
 }

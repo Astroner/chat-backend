@@ -1,6 +1,10 @@
 import { webcrypto } from 'crypto';
 
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -19,15 +23,15 @@ export class ContactsService {
         try {
             const parsedPubKey = JSON.parse(data.publicKey);
             await webcrypto.subtle.importKey(
-                "jwk", 
+                'jwk',
                 parsedPubKey,
                 {
-                    name: "RSA-OAEP",
-                    hash: "SHA-256"
+                    name: 'RSA-OAEP',
+                    hash: 'SHA-256',
                 },
                 true,
-                parsedPubKey.key_ops as KeyUsage[] ?? []
-            )
+                (parsedPubKey.key_ops as KeyUsage[]) ?? [],
+            );
 
             const parsedPubSign = JSON.parse(data.publicSign);
             await webcrypto.subtle.importKey(
@@ -39,18 +43,18 @@ export class ContactsService {
                 },
                 !!parsedPubSign.ext,
                 (parsedPubSign.key_ops as KeyUsage[]) ?? [],
-            )
-        } catch(e) {
-            throw new BadRequestException("Invalid keys");
+            );
+        } catch (e) {
+            throw new BadRequestException('Invalid keys');
         }
-        
+
         return this.contact.create(data);
     }
 
     async getByName(name: string) {
         const contact = await this.contact.findOne({ name });
 
-        if(!contact) throw new NotFoundException();
+        if (!contact) throw new NotFoundException();
 
         return contact;
     }
