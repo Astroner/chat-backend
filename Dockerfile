@@ -9,6 +9,8 @@ RUN npm ci
 
 COPY . .
 
+ENV NODE_ENV=production
+
 RUN npm run build
 
 ENV PORT=3000

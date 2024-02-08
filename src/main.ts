@@ -6,11 +6,12 @@ import { env } from './env';
 import { WsAdapter } from '@nestjs/platform-ws';
 
 async function bootstrap() {
-    console.log('Env', env);
+    if(env.NODE_ENV !== "production") console.log('Env', env);
 
     const app = await NestFactory.create(AppModule);
 
     app.useWebSocketAdapter(new WsAdapter(app));
+    app.enableCors();
 
     await app.listen(env.PORT);
 }

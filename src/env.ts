@@ -6,6 +6,7 @@ const createEnv = () => {
     return {
         PORT: process.env.PORT ?? 4040,
         MONGO_ADDRESS: process.env.MONGO_ADDRESS ?? 'error',
+        NODE_ENV: process.env.NODE_ENV === "production" ? "production" : "development"
     };
 };
 

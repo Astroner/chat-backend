@@ -6,11 +6,20 @@ export type CreateContactDTO = {
 
 export type DeleteContactDTO = {
     name: string;
-    signature: string;
+    signature: Buffer;
 };
 
 export type UpdateContactDTO = {
     name: string;
     update: Partial<CreateContactDTO>;
-    signature: string;
+    signature: Buffer;
 };
+
+export type UpdateContactDTORaw = {
+    name: string,
+    update: string
+}
+
+export type FindContactDTO = {
+    name: string;
+}
