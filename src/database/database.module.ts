@@ -6,6 +6,9 @@ import { Contact, ContactScheme } from './contacts/contact.scheme';
 import { env } from 'src/env';
 import { ContactsService } from './contacts/contacts.service';
 import { ContactsController } from './contacts/contacts.controller';
+import { Message, MessageScheme } from './messages/message.scheme';
+import { MessagesService } from './messages/messages.service';
+import { MessagesController } from './messages/messages.controller';
 
 @Module({
     imports: [
@@ -13,8 +16,12 @@ import { ContactsController } from './contacts/contacts.controller';
         MongooseModule.forFeature([
             { name: Contact.name, schema: ContactScheme },
         ]),
+        MongooseModule.forFeature([
+            { name: Message.name, schema: MessageScheme },
+        ]),
     ],
-    providers: [ContactsService],
-    controllers: [ContactsController],
+    providers: [ContactsService, MessagesService],
+    controllers: [ContactsController, MessagesController],
+    exports: [MessagesService]
 })
 export class DatabaseModule {}
