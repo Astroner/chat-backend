@@ -22,6 +22,6 @@ import { MessagesController } from './messages/messages.controller';
     ],
     providers: [ContactsService, MessagesService],
     controllers: [ContactsController, MessagesController],
-    exports: [MessagesService]
+    exports: [MessagesService],
 })
 export class DatabaseModule {}

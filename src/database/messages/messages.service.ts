@@ -5,29 +5,26 @@ import { FilterQuery, Model } from 'mongoose';
 
 @Injectable()
 export class MessagesService {
-    constructor(
-        @InjectModel(Message.name) private message: Model<Message>
-    ) {}
-
+    constructor(@InjectModel(Message.name) private message: Model<Message>) {}
 
     async addMessage(data: Buffer, timestamp: number = Date.now()) {
         await this.message.create({
             data: data,
-            timestamp
-        })
+            timestamp,
+        });
     }
 
     async getAll(from?: number, to?: number) {
         const filter: FilterQuery<Message> = {};
 
-        if(from) {
-            if(!filter.timestamp) {
+        if (from) {
+            if (!filter.timestamp) {
                 filter.timestamp = {};
             }
             filter.timestamp.$gte = from;
         }
-        if(to) {
-            if(!filter.timestamp) {
+        if (to) {
+            if (!filter.timestamp) {
                 filter.timestamp = {};
             }
 

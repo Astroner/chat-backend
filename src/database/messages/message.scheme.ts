@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class Message {
@@ -6,7 +6,7 @@ export class Message {
     timestamp: number;
 
     @Prop({ type: Buffer, required: true })
-    data: Buffer
+    data: Buffer;
 }
 
 export const MessageScheme = SchemaFactory.createForClass(Message);

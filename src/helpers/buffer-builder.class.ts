@@ -7,11 +7,8 @@ type Operation =
     | OperationTemplate<'append-byte', number>
     | OperationTemplate<'append-uint16', number>
     | OperationTemplate<'append-string', { src: string; skipLength: boolean }>
-    | OperationTemplate<
-          'append-buffer',
-          { src: Buffer; skipLength: boolean }
-      >
-    | OperationTemplate<'append-uint64', bigint>
+    | OperationTemplate<'append-buffer', { src: Buffer; skipLength: boolean }>
+    | OperationTemplate<'append-uint64', bigint>;
 
 export class BufferBuilder {
     private operations: Operation[] = [];
@@ -61,7 +58,7 @@ export class BufferBuilder {
     }
 
     getBuffer() {
-        const buffer = Buffer.allocUnsafe(this.bufferSize)
+        const buffer = Buffer.allocUnsafe(this.bufferSize);
 
         let cursor = 0;
 
@@ -101,7 +98,10 @@ export class BufferBuilder {
 
                 case 'append-buffer': {
                     if (!operation.data.skipLength) {
-                        buffer.writeUInt16LE(operation.data.src.byteLength, cursor);
+                        buffer.writeUInt16LE(
+                            operation.data.src.byteLength,
+                            cursor,
+                        );
                         cursor += 2;
                     }
 

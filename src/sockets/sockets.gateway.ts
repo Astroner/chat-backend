@@ -10,9 +10,7 @@ import { WebSocket, WebSocketServer } from 'ws';
 export class SocketsGateway implements OnGatewayConnection, OnGatewayInit {
     server!: WebSocketServer;
 
-    constructor(
-        private messages: MessagesService
-    ) {}
+    constructor(private messages: MessagesService) {}
 
     afterInit(server: WebSocketServer) {
         this.server = server;
@@ -20,13 +18,11 @@ export class SocketsGateway implements OnGatewayConnection, OnGatewayInit {
 
     handleConnection(client: WebSocket) {
         client.onmessage = (message) => {
-            Promise.resolve(Date.now())
-                .then(timestamp => {
-                    if(!(message.data instanceof Buffer)) return;
+            Promise.resolve(Date.now()).then((timestamp) => {
+                if (!(message.data instanceof Buffer)) return;
 
-                    this.messages.addMessage(message.data, timestamp);
-                })
-                
+                this.messages.addMessage(message.data, timestamp);
+            });
 
             this.server.clients.forEach((current) => {
                 if (current === client) return;
