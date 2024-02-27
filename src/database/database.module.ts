@@ -9,6 +9,9 @@ import { ContactsController } from './contacts/contacts.controller';
 import { Message, MessageScheme } from './messages/message.scheme';
 import { MessagesService } from './messages/messages.service';
 import { MessagesController } from './messages/messages.controller';
+import { PushSubscription, PushSubscriptionSchema } from './push-subscriptions/push-subscription.scheme';
+import { PushSubscriptionsService } from './push-subscriptions/push-subscriptions.service';
+import { PushSubscriptionsController } from './push-subscriptions/push-subscriptions.controller';
 
 @Module({
     imports: [
@@ -19,9 +22,12 @@ import { MessagesController } from './messages/messages.controller';
         MongooseModule.forFeature([
             { name: Message.name, schema: MessageScheme },
         ]),
+        MongooseModule.forFeature([
+            { name: PushSubscription.name, schema: PushSubscriptionSchema },
+        ]),
     ],
-    providers: [ContactsService, MessagesService],
-    controllers: [ContactsController, MessagesController],
-    exports: [MessagesService],
+    providers: [ContactsService, MessagesService, PushSubscriptionsService],
+    controllers: [ContactsController, MessagesController, PushSubscriptionsController],
+    exports: [MessagesService, PushSubscriptionsService],
 })
 export class DatabaseModule {}

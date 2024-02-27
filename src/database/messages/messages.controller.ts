@@ -1,7 +1,9 @@
 import { Controller, Get, Query, Res } from '@nestjs/common';
-import { MessagesService } from './messages.service';
-import { BufferBuilder } from 'src/helpers/buffer-builder.class';
 import { Response } from 'express';
+
+import { BufferBuilder } from 'src/helpers/buffer-builder.class';
+
+import { MessagesService } from './messages.service';
 
 @Controller('messages')
 export class MessagesController {

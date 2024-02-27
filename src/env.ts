@@ -10,6 +10,11 @@ const createEnv = () => {
             process.env.NODE_ENV === 'production'
                 ? 'production'
                 : 'development',
+        VAPID: {
+            PUBLIC: process.env.VAPID_PUBLIC ?? "",
+            PRIVATE: process.env.VAPID_PRIVATE ?? "",
+            SUBJECT: process.env.VAPID_SUBJECT ?? "mailto:example@qq.com"
+        }
     };
 };
 
