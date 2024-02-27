@@ -12,8 +12,8 @@ import { env } from 'src/env';
         WebPushModule.forVAPID({
             publicKey: env.VAPID.PUBLIC,
             privateKey: env.VAPID.PRIVATE,
-            subject: env.VAPID.SUBJECT
-        })
+            subject: env.VAPID.SUBJECT,
+        }),
     ],
 })
 export class SocketsModule {}

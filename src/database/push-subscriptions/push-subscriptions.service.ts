@@ -10,24 +10,30 @@ export class PushSubscriptionsService implements OnModuleInit {
     private cache = new Map<string, PushSubscription>();
 
     constructor(
-        @InjectModel(PushSubscription.name) private subscriptions: Model<PushSubscription>
+        @InjectModel(PushSubscription.name)
+        private subscriptions: Model<PushSubscription>,
     ) {}
 
     async onModuleInit() {
         const items = await this.subscriptions.find();
 
-        for(const item of items) {
+        for (const item of items) {
             this.cache.set(item.id, {
                 auth: item.auth,
                 endpoint: item.endpoint,
-                key: item.key
-            })
-        }   
+                key: item.key,
+            });
+        }
     }
 
     async addSubscription(createDto: CreatePushSubscriptionDTO) {
-        for(const item of this.cache.values()) {
-            if(item.endpoint === createDto.endpoint && item.auth === createDto.auth && item.key === createDto.key) return;
+        for (const item of this.cache.values()) {
+            if (
+                item.endpoint === createDto.endpoint &&
+                item.auth === createDto.auth &&
+                item.key === createDto.key
+            )
+                return;
         }
 
         const saved = await this.subscriptions.create(createDto);
@@ -35,10 +41,10 @@ export class PushSubscriptionsService implements OnModuleInit {
         this.cache.set(saved.id, {
             auth: saved.auth,
             endpoint: saved.endpoint,
-            key: saved.key
-        })
+            key: saved.key,
+        });
 
-        return saved.id
+        return saved.id;
     }
 
     async deleteSub(id: string) {
@@ -47,8 +53,8 @@ export class PushSubscriptionsService implements OnModuleInit {
     }
 
     *getAll() {
-        for(const [id, sub] of this.cache.entries()) {
-            yield { id, sub }
+        for (const [id, sub] of this.cache.entries()) {
+            yield { id, sub };
         }
     }
 }

@@ -9,7 +9,10 @@ import { ContactsController } from './contacts/contacts.controller';
 import { Message, MessageScheme } from './messages/message.scheme';
 import { MessagesService } from './messages/messages.service';
 import { MessagesController } from './messages/messages.controller';
-import { PushSubscription, PushSubscriptionSchema } from './push-subscriptions/push-subscription.scheme';
+import {
+    PushSubscription,
+    PushSubscriptionSchema,
+} from './push-subscriptions/push-subscription.scheme';
 import { PushSubscriptionsService } from './push-subscriptions/push-subscriptions.service';
 import { PushSubscriptionsController } from './push-subscriptions/push-subscriptions.controller';
 
@@ -27,7 +30,11 @@ import { PushSubscriptionsController } from './push-subscriptions/push-subscript
         ]),
     ],
     providers: [ContactsService, MessagesService, PushSubscriptionsService],
-    controllers: [ContactsController, MessagesController, PushSubscriptionsController],
+    controllers: [
+        ContactsController,
+        MessagesController,
+        PushSubscriptionsController,
+    ],
     exports: [MessagesService, PushSubscriptionsService],
 })
 export class DatabaseModule {}

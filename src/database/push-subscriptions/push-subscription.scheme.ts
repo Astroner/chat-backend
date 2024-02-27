@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
 export class PushSubscription {
@@ -12,4 +12,5 @@ export class PushSubscription {
     auth: string;
 }
 
-export const PushSubscriptionSchema = SchemaFactory.createForClass(PushSubscription)
+export const PushSubscriptionSchema =
+    SchemaFactory.createForClass(PushSubscription);

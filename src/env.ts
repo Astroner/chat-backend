@@ -11,10 +11,10 @@ const createEnv = () => {
                 ? 'production'
                 : 'development',
         VAPID: {
-            PUBLIC: process.env.VAPID_PUBLIC ?? "",
-            PRIVATE: process.env.VAPID_PRIVATE ?? "",
-            SUBJECT: process.env.VAPID_SUBJECT ?? "mailto:example@qq.com"
-        }
+            PUBLIC: process.env.VAPID_PUBLIC ?? '',
+            PRIVATE: process.env.VAPID_PRIVATE ?? '',
+            SUBJECT: process.env.VAPID_SUBJECT ?? 'mailto:example@qq.com',
+        },
     };
 };
 

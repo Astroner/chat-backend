@@ -14,7 +14,7 @@ export class SocketsGateway implements OnGatewayConnection, OnGatewayInit {
 
     constructor(
         private messages: MessagesService,
-        private push: WebPushService
+        private push: WebPushService,
     ) {}
 
     afterInit(server: WebSocketServer) {

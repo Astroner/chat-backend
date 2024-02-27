@@ -5,5 +5,5 @@ export interface CreatePushSubscriptionDTO {
 }
 
 export interface DeleteSubscriptionDTO {
-    id: string
+    id: string;
 }

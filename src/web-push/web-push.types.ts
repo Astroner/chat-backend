@@ -1,5 +1,5 @@
 export type VapidInfo = {
-    publicKey: string, 
-    privateKey: string,
-    subject: string
-}
+    publicKey: string;
+    privateKey: string;
+    subject: string;
+};
